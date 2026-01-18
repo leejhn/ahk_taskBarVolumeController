@@ -32,3 +32,6 @@ The script identifies the coordinates of all active taskbars (including secondar
 ## 📄 License
 
 This project is open-source and available under the [MIT License](LICENSE).
+
+
+

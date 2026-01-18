@@ -143,12 +143,24 @@ AdjustVolume(direction) {
 }
 
 ; ============================================
-; 핫키 설정
+; 핫키 설정 (조건부 실행)
 ; ============================================
-#HotIf MouseInTaskbar()
-    WheelUp::AdjustVolume("up")      ; 휠 위로 → 볼륨 증가
-    WheelDown::AdjustVolume("down")  ; 휠 아래로 → 볼륨 감소
-#HotIf
+; #HotIf 대신 핫키 내부에서 조건 확인 (시스템 간섭 방지)
+WheelUp:: {
+    if (MouseInTaskbar()) {
+        AdjustVolume("up")
+    } else {
+        Send "{WheelUp}"  ; 태스크바가 아니면 원래 동작 전달
+    }
+}
+
+WheelDown:: {
+    if (MouseInTaskbar()) {
+        AdjustVolume("down")
+    } else {
+        Send "{WheelDown}"  ; 태스크바가 아니면 원래 동작 전달
+    }
+}
 
 ; ============================================
 ; 수동 업데이트 핫키 (선택사항)
